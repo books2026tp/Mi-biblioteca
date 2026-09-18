@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Mi Biblioteca 📚</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -44,7 +48,9 @@ main{
     margin-bottom:25px;
 }
 
-input,select,button{
+input,
+select,
+button{
     padding:12px 14px;
     border-radius:12px;
     border:1px solid #e3d9e6;
@@ -66,7 +72,10 @@ button{
 
 .library{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    grid-template-columns:repeat(
+        auto-fill,
+        minmax(240px,1fr)
+    );
     gap:18px;
 }
 
@@ -109,89 +118,108 @@ button{
     color:#766d79;
     padding:50px 10px;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
     <h1>📚 Mi Biblioteca</h1>
-    <p>Mis novelas y lecturas favoritas</p>
+
+    <p>
+        Mis novelas y lecturas favoritas
+    </p>
+
 </header>
 
 <main>
 
-<div class="toolbar">
+    <div class="toolbar">
 
-<input
-    id="search"
-    type="search"
-    placeholder="🔎 Buscar..."
-    oninput="buscar()"
->
+        <input
+            id="search"
+            type="search"
+            placeholder="🔎 Buscar..."
+            oninput="buscar()"
+        >
 
-<select id="categoria" onchange="buscar()">
-    <option value="">Todos los géneros</option>
-    <option value="Romance">💕 Romance</option>
-    <option value="Fantasia">🧚 Fantasía</option>
-    <option value="Suspenso">🔎 Suspenso</option>
-    <option value="Clasicos">📚 Clásicos</option>
-</select>
+        <select
+            id="categoria"
+            onchange="buscar()"
+        >
 
-</div>
+            <option value="">
+                Todos los géneros
+            </option>
 
-<div id="biblioteca" class="library"></div>
+            <option value="Romance">
+                💕 Romance
+            </option>
+
+            <option value="Fantasia">
+                🧚 Fantasía
+            </option>
+
+            <option value="Suspenso">
+                🔎 Suspenso
+            </option>
+
+            <option value="Clasicos">
+                📚 Clásicos
+            </option>
+
+        </select>
+
+    </div>
+
+    <div
+        id="biblioteca"
+        class="library"
+    ></div>
 
 </main>
 
 <script>
 
-const libros = [
-
-{
-    titulo:"Harry Potter y la piedra filosofal",
-    autor:"J. K. Rowling",
-    categoria:"Fantasia",
-    pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaPiedraFilosofal.pdf"
-},
-
-];
-},
 /*
 ==================================================
-AQUÍ AGREGAREMOS TUS NOVELAS
+LIBROS
 ==================================================
-
-Ejemplo:
-
-{
-    titulo:"La casa de los espíritus",
-    autor:"Isabel Allende",
-    categoria:"Clasicos",
-    pdf:"https://ejemplo.com/libro.pdf"
-},
-
-Las categorías disponibles son:
-
-"Romance"
-"Fantasia"
-"Suspenso"
-"Clasicos"
-
-IMPORTANTE:
-NO tienes que escribir el enlace de Google Viewer.
-
-La página lo construirá automáticamente.
 */
 
+const libros = [
+
+    {
+        titulo:"Harry Potter y la piedra filosofal",
+        autor:"J. K. Rowling",
+        categoria:"Fantasia",
+        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaPiedraFilosofal.pdf"
+    }
+
 ];
+
+
+/*
+==================================================
+VISOR DE PDF
+==================================================
+*/
 
 function visor(url){
 
     return "https://docs.google.com/viewer?url="
-           + encodeURIComponent(url);
+        + encodeURIComponent(url);
 
 }
+
+
+/*
+==================================================
+MOSTRAR LIBROS
+==================================================
+*/
 
 function mostrar(lista){
 
@@ -201,27 +229,49 @@ function mostrar(lista){
     if(lista.length === 0){
 
         contenedor.innerHTML = `
-        <div class="empty">
-            <div style="font-size:50px">📚</div>
-            <h2>Tu biblioteca está vacía</h2>
-            <p>Pronto podremos agregar tus novelas.</p>
-        </div>`;
+
+            <div class="empty">
+
+                <div style="font-size:50px">
+                    📚
+                </div>
+
+                <h2>
+                    Tu biblioteca está vacía
+                </h2>
+
+                <p>
+                    No encontramos libros con esa búsqueda.
+                </p>
+
+            </div>
+
+        `;
 
         return;
     }
 
-    contenedor.innerHTML = lista.map(libro => `
+    contenedor.innerHTML = lista.map(
+        libro => `
 
         <article class="card">
 
-            <div class="book-icon">📄</div>
+            <div class="book-icon">
+                📄
+            </div>
 
-            <h2>${libro.titulo}</h2>
+            <h2>
+                ${libro.titulo}
+            </h2>
 
             <p>
+
                 ${libro.autor || "Sin autor"}
+
                 <br>
+
                 ${libro.categoria}
+
             </p>
 
             <a
@@ -234,38 +284,67 @@ function mostrar(lista){
 
         </article>
 
-    `).join("");
+    `
+    ).join("");
 
 }
+
+
+/*
+==================================================
+BUSCADOR Y FILTRO
+==================================================
+*/
 
 function buscar(){
 
     const texto =
-        document.getElementById("search")
+        document
+        .getElementById("search")
         .value
         .toLowerCase();
 
     const categoria =
-        document.getElementById("categoria")
+        document
+        .getElementById("categoria")
         .value;
 
-    const resultados = libros.filter(libro => {
+    const resultados =
+        libros.filter(libro => {
 
-        const coincideTexto =
-            libro.titulo.toLowerCase().includes(texto) ||
-            (libro.autor || "").toLowerCase().includes(texto);
+            const coincideTexto =
+                libro.titulo
+                .toLowerCase()
+                .includes(texto)
 
-        const coincideCategoria =
-            !categoria ||
-            libro.categoria === categoria;
+                ||
 
-        return coincideTexto && coincideCategoria;
+                (libro.autor || "")
+                .toLowerCase()
+                .includes(texto);
 
-    });
+            const coincideCategoria =
+                !categoria
+                ||
+                libro.categoria === categoria;
+
+            return
+                coincideTexto
+                &&
+                coincideCategoria;
+
+        });
 
     mostrar(resultados);
 
 }
+
+
+/*
+==================================================
+INICIAR BIBLIOTECA
+==================================================
+*/
 
 mostrar(libros);
 
