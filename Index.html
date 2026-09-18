@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Biblioteca 📚</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f8f3f9;
+    color:#302936;
+}
+
+header{
+    background:linear-gradient(135deg,#eadcf0,#f8eaf2);
+    padding:40px 20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:34px;
+}
+
+header p{
+    margin:8px 0 0;
+    color:#766d79;
+}
+
+main{
+    max-width:1000px;
+    margin:auto;
+    padding:25px 18px;
+}
+
+.toolbar{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+
+input,select,button{
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid #e3d9e6;
+    font-size:15px;
+}
+
+#search{
+    flex:1;
+    min-width:220px;
+}
+
+button{
+    background:#9b6fae;
+    color:white;
+    border:0;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.library{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border:1px solid #e7dfe9;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 5px 18px rgba(80,50,80,.08);
+}
+
+.book-icon{
+    font-size:42px;
+}
+
+.card h2{
+    font-size:19px;
+    margin:10px 0 5px;
+}
+
+.card p{
+    color:#766d79;
+    font-size:14px;
+}
+
+.read{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:#9b6fae;
+    color:white;
+    padding:11px;
+    border-radius:11px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.empty{
+    text-align:center;
+    color:#766d79;
+    padding:50px 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Mi Biblioteca</h1>
+    <p>Mis trabajos, lecturas y apuntes</p>
+</header>
+
+<main>
+
+<div class="toolbar">
+
+<input
+    id="search"
+    type="search"
+    placeholder="🔎 Buscar..."
+    oninput="buscar()"
+>
+
+<select id="categoria" onchange="buscar()">
+    <option value="">Todas las categorías</option>
+    <option value="Universidad">Universidad</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Informática">Informática</option>
+    <option value="Lecturas">Lecturas</option>
+    <option value="Apuntes">Apuntes</option>
+</select>
+
+</div>
+
+<div id="biblioteca" class="library"></div>
+
+</main>
+
+<script>
+
+const libros = [
+
+/*
+==================================================
+AQUÍ AGREGAREMOS TUS PDFs
+==================================================
+
+Ejemplo:
+
+{
+    titulo:"La casa de los espíritus",
+    autor:"Isabel Allende",
+    categoria:"Lecturas",
+    pdf:"https://biblioteca.choapa.cl/Libros/La%20casa%20de%20los%20espiritus%20-%20Isabel%20Allende.pdf"
+},
+
+IMPORTANTE:
+NO tienes que escribir el enlace de Google Viewer.
+
+La página lo construirá automáticamente.
+*/
+
+];
+
+function visor(url){
+
+    return "https://docs.google.com/viewer?url="
+           + encodeURIComponent(url);
+
+}
+
+function mostrar(lista){
+
+    const contenedor =
+        document.getElementById("biblioteca");
+
+    if(lista.length === 0){
+
+        contenedor.innerHTML = `
+        <div class="empty">
+            <div style="font-size:50px">📚</div>
+            <h2>Tu biblioteca está vacía</h2>
+            <p>Pronto podremos agregar tus PDFs.</p>
+        </div>`;
+
+        return;
+    }
+
+    contenedor.innerHTML = lista.map(libro => `
+
+        <article class="card">
+
+            <div class="book-icon">📄</div>
+
+            <h2>${libro.titulo}</h2>
+
+            <p>
+                ${libro.autor || "Sin autor"}
+                <br>
+                ${libro.categoria}
+            </p>
+
+            <a
+                class="read"
+                href="${visor(libro.pdf)}"
+                target="_blank"
+            >
+                📖 Leer
+            </a>
+
+        </article>
+
+    `).join("");
+
+}
+
+function buscar(){
+
+    const texto =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const categoria =
+        document.getElementById("categoria")
+        .value;
+
+    const resultados = libros.filter(libro => {
+
+        const coincideTexto =
+            libro.titulo.toLowerCase().includes(texto) ||
+            (libro.autor || "").toLowerCase().includes(texto);
+
+        const coincideCategoria =
+            !categoria ||
+            libro.categoria === categoria;
+
+        return coincideTexto && coincideCategoria;
+
+    });
+
+    mostrar(resultados);
+
+}
+
+mostrar(libros);
+
+</script>
+
+</body>
+</html>
