@@ -116,7 +116,7 @@ button{
 
 <header>
     <h1>📚 Mi Biblioteca</h1>
-    <p>Mis trabajos, lecturas y apuntes</p>
+    <p>Mis novelas y lecturas favoritas</p>
 </header>
 
 <main>
@@ -131,12 +131,11 @@ button{
 >
 
 <select id="categoria" onchange="buscar()">
-    <option value="">Todas las categorías</option>
-    <option value="Ficcion">Ficcion</option>
-    <option value="Romance">Romance</option>
-    <option value="Accion">Accion</option>
-    <option value="Suspenso">Suspenso</option>
-    <option value="Articulos">Articulos</option>
+    <option value="">Todos los géneros</option>
+    <option value="Romance">💕 Romance</option>
+    <option value="Fantasia">🧚 Fantasía</option>
+    <option value="Suspenso">🔎 Suspenso</option>
+    <option value="Clasicos">📚 Clásicos</option>
 </select>
 
 </div>
@@ -151,7 +150,7 @@ const libros = [
 
 /*
 ==================================================
-AQUÍ AGREGAREMOS TUS PDFs
+AQUÍ AGREGAREMOS TUS NOVELAS
 ==================================================
 
 Ejemplo:
@@ -159,9 +158,16 @@ Ejemplo:
 {
     titulo:"La casa de los espíritus",
     autor:"Isabel Allende",
-    categoria:"Lecturas",
-    pdf:"https://biblioteca.choapa.cl/Libros/La%20casa%20de%20los%20espiritus%20-%20Isabel%20Allende.pdf"
+    categoria:"Clasicos",
+    pdf:"https://ejemplo.com/libro.pdf"
 },
+
+Las categorías disponibles son:
+
+"Romance"
+"Fantasia"
+"Suspenso"
+"Clasicos"
 
 IMPORTANTE:
 NO tienes que escribir el enlace de Google Viewer.
@@ -189,7 +195,7 @@ function mostrar(lista){
         <div class="empty">
             <div style="font-size:50px">📚</div>
             <h2>Tu biblioteca está vacía</h2>
-            <p>Pronto podremos agregar tus PDFs.</p>
+            <p>Pronto podremos agregar tus novelas.</p>
         </div>`;
 
         return;
