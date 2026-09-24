@@ -49,8 +49,7 @@ main{
 }
 
 input,
-select,
-button{
+select{
     padding:12px 14px;
     border-radius:12px;
     border:1px solid #e3d9e6;
@@ -60,14 +59,6 @@ button{
 #search{
     flex:1;
     min-width:220px;
-}
-
-button{
-    background:#9b6fae;
-    color:white;
-    border:0;
-    cursor:pointer;
-    font-weight:bold;
 }
 
 .library{
@@ -126,267 +117,336 @@ button{
 
 <header>
 
-    <h1>📚 Mi Biblioteca</h1>
+<h1>📚 Mi Biblioteca</h1>
 
-    <p>
-        Mis novelas y lecturas favoritas
-    </p>
+<p>
+Mis novelas, lecturas y trabajos de la universidad
+</p>
 
 </header>
 
 <main>
 
-    <div class="toolbar">
+<div class="toolbar">
 
-        <input
-            id="search"
-            type="search"
-            placeholder="🔎 Buscar..."
-            oninput="buscar()"
-        >
+<input
+id="search"
+type="search"
+placeholder="🔎 Buscar libro o autor..."
+oninput="buscar()"
+>
 
-        <select
-            id="categoria"
-            onchange="buscar()"
-        >
+<select
+id="categoria"
+onchange="buscar()"
+>
 
-            <option value="">
-                Todos los géneros
-            </option>
+<option value="">
+Todos los géneros
+</option>
 
-            <option value="Romance">
-                💕 Romance
-            </option>
+<option value="Romance">
+💕 Romance
+</option>
 
-            <option value="Fantasia">
-                🧚 Fantasía
-            </option>
+<option value="Fantasia">
+🧚 Fantasía
+</option>
 
-            <option value="Suspenso">
-                🔎 Suspenso
-            </option>
+<option value="Suspenso">
+🔎 Suspenso
+</option>
 
-            <option value="Clasicos">
-                📚 Clásicos
-            </option>
+<option value="Clasicos">
+📚 Clásicos
+</option>
 
-        </select>
+<option value="Universidad">
+🎓 Universidad
+</option>
 
-    </div>
+</select>
 
-    <div
-        id="biblioteca"
-        class="library"
-    ></div>
+</div>
+
+
+<div
+id="biblioteca"
+class="library"
+></div>
 
 </main>
 
+
 <script>
 
-/*
-==================================================
+/* ==================================================
 LIBROS
-==================================================
-*/
+================================================== */
 
 const libros = [
 
-    {
-        titulo:"Harry Potter y la piedra filosofal",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaPiedraFilosofal.pdf"
-    },
+/* HARRY POTTER */
 
-    {
-        titulo:"Harry Potter y la cámara secreta",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaCamaraDeLosSecretos.pdf"
-    },
+{
+titulo:"Harry Potter y la piedra filosofal",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaPiedraFilosofal.pdf"
+},
 
-    {
-        titulo:"Harry Potter y el prisionero de Azkaban",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterElPrisioneroDeAzkaban.pdf"
-    },
+{
+titulo:"Harry Potter y la cámara secreta",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaCamaraDeLosSecretos.pdf"
+},
 
-    {
-        titulo:"Harry Potter y el cáliz de fuego",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterElCalizDeFuego.pdf"
-    },
+{
+titulo:"Harry Potter y el prisionero de Azkaban",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterElPrisioneroDeAzkaban.pdf"
+},
 
-    {
-        titulo:"Harry Potter y la Orden del Fénix",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaOrdenDelFenix.pdf"
-    },
+{
+titulo:"Harry Potter y el cáliz de fuego",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterElCalizDeFuego.pdf"
+},
 
-    {
-        titulo:"Harry Potter y el misterio del príncipe",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterElMisterioDelPrincipe.pdf"
-    },
+{
+titulo:"Harry Potter y la Orden del Fénix",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLaOrdenDelFenix.pdf"
+},
 
-    {
-        titulo:"Harry Potter y las reliquias de la muerte",
-        autor:"J. K. Rowling",
-        categoria:"Fantasia",
-        pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLasReliquiasDeLaMuerte.pdf"
-    }
+{
+titulo:"Harry Potter y el misterio del príncipe",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterElMisterioDelPrincipe.pdf"
+},
+
+{
+titulo:"Harry Potter y las reliquias de la muerte",
+autor:"J. K. Rowling",
+categoria:"Fantasia",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/HarryPotterLasReliquiasDeLaMuerte.pdf"
+},
+
+
+/* NOVELAS */
+
+{
+titulo:"La casa de los espíritus",
+autor:"Isabel Allende",
+categoria:"Clasicos",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/LaCasaDeLosEspiritus.pdf"
+},
+
+{
+titulo:"El olvido que seremos",
+autor:"Héctor Abad Faciolince",
+categoria:"Clasicos",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/ElOlvidoQueSeremos.pdf"
+},
+
+{
+titulo:"Satanás",
+autor:"Mario Mendoza",
+categoria:"Suspenso",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/Satanas.pdf"
+},
+
+{
+titulo:"Ensayo sobre la ceguera",
+autor:"José Saramago",
+categoria:"Clasicos",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/EnsayoSobreLaCeguera.pdf"
+},
+
+{
+titulo:"Cien años de soledad",
+autor:"Gabriel García Márquez",
+categoria:"Clasicos",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/CienAnosDeSoledad.pdf"
+},
+
+{
+titulo:"Boulevard",
+autor:"Flor M. Salvador",
+categoria:"Romance",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/Boulevard.pdf"
+},
+
+{
+titulo:"The Little Prince",
+autor:"Antoine de Saint-Exupéry",
+categoria:"Clasicos",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/TheLittlePrince.pdf"
+},
+
+{
+titulo:"El Principito",
+autor:"Antoine de Saint-Exupéry",
+categoria:"Clasicos",
+pdf:"https://raw.githubusercontent.com/books2026tp/Mi-biblioteca/main/ElPrincipito.pdf"
+}
 
 ];
 
 
-/*
-==================================================
-VISOR DE PDF
-==================================================
-*/
+/* ==================================================
+GOOGLE VIEWER
+================================================== */
 
 function visor(url){
 
-    return "https://docs.google.com/viewer?url="
-        + encodeURIComponent(url);
+return "https://docs.google.com/viewer?url="
++ encodeURIComponent(url);
 
 }
 
 
-/*
-==================================================
+/* ==================================================
 MOSTRAR LIBROS
-==================================================
-*/
+================================================== */
 
 function mostrar(lista){
 
-    const contenedor =
-        document.getElementById("biblioteca");
+const contenedor =
+document.getElementById("biblioteca");
 
-    if(lista.length === 0){
+if(lista.length === 0){
 
-        contenedor.innerHTML = `
+contenedor.innerHTML = `
 
-            <div class="empty">
+<div class="empty">
 
-                <div style="font-size:50px">
-                    📚
-                </div>
+<div style="font-size:50px">
+📚
+</div>
 
-                <h2>
-                    Tu biblioteca está vacía
-                </h2>
+<h2>
+No encontramos ese libro
+</h2>
 
-                <p>
-                    No encontramos libros con esa búsqueda.
-                </p>
+<p>
+Prueba con otro título, autor o género.
+</p>
 
-            </div>
+</div>
 
-        `;
+`;
 
-        return;
-    }
-
-    contenedor.innerHTML = lista.map(
-        libro => `
-
-        <article class="card">
-
-            <div class="book-icon">
-                📄
-            </div>
-
-            <h2>
-                ${libro.titulo}
-            </h2>
-
-            <p>
-
-                ${libro.autor || "Sin autor"}
-
-                <br>
-
-                ${libro.categoria}
-
-            </p>
-
-            <a
-                class="read"
-                href="${visor(libro.pdf)}"
-                target="_blank"
-            >
-                📖 Leer
-            </a>
-
-        </article>
-
-    `
-    ).join("");
+return;
 
 }
 
 
-/*
-==================================================
-BUSCADOR Y FILTRO
-==================================================
-*/
+contenedor.innerHTML = lista.map(
+
+libro => `
+
+<article class="card">
+
+<div class="book-icon">
+📖
+</div>
+
+<h2>
+${libro.titulo}
+</h2>
+
+<p>
+
+${libro.autor}
+
+<br>
+
+${libro.categoria}
+
+</p>
+
+<a
+class="read"
+href="${visor(libro.pdf)}"
+target="_blank"
+>
+📖 Leer
+</a>
+
+</article>
+
+`
+
+).join("");
+
+}
+
+
+/* ==================================================
+BUSCADOR
+================================================== */
 
 function buscar(){
 
-    const texto =
-        document
-        .getElementById("search")
-        .value
-        .toLowerCase();
+const texto =
+document
+.getElementById("search")
+.value
+.toLowerCase();
 
-    const categoria =
-        document
-        .getElementById("categoria")
-        .value;
+const categoria =
+document
+.getElementById("categoria")
+.value;
 
-    const resultados =
-        libros.filter(libro => {
 
-            const coincideTexto =
-                libro.titulo
-                .toLowerCase()
-                .includes(texto)
+const resultados =
+libros.filter(libro => {
 
-                ||
+const coincideTexto =
 
-                (libro.autor || "")
-                .toLowerCase()
-                .includes(texto);
+libro.titulo
+.toLowerCase()
+.includes(texto)
 
-            const coincideCategoria =
-                !categoria
-                ||
-                libro.categoria === categoria;
+||
 
-            return
-                coincideTexto
-                &&
-                coincideCategoria;
+libro.autor
+.toLowerCase()
+.includes(texto);
 
-        });
 
-    mostrar(resultados);
+const coincideCategoria =
+
+!categoria
+
+||
+
+libro.categoria === categoria;
+
+
+return
+coincideTexto
+&&
+coincideCategoria;
+
+});
+
+
+mostrar(resultados);
 
 }
 
 
-/*
-==================================================
-INICIAR BIBLIOTECA
-==================================================
-*/
+/* ==================================================
+INICIAR
+================================================== */
 
 mostrar(libros);
 
